@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import moment from 'moment'
 
 import template from './datepicker.html!text'
 import './datepicker.scss!'
@@ -6,9 +7,9 @@ import './datepicker.scss!'
 export default {
   template: template,
 
-  date() {
+  data() {
     return {
-      date: null
+      date: moment().format('YYYY-MM-DD').clone()
     }
   },
 
