@@ -1,14 +1,17 @@
 import Vue from 'vue'
 import template from './root.html!text'
+
 import mapComponent from './map.js'
 import sliderComponent from './slider.js'
+import dateComponent from './datepicker.js'
 
 export default {
   template: template,
 
   components: {
     'map-view': mapComponent,
-    'hour-slider': sliderComponent
+    'hour-slider': sliderComponent,
+    'date-picker': dateComponent
   },
 
   events: {
