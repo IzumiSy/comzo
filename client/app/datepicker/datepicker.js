@@ -1,5 +1,7 @@
 import Vue from 'vue'
+
 import template from './datepicker.html!text'
+import './datepicker.scss!'
 
 export default {
   template: template,

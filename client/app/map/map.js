@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import GoogleMap from 'google-maps'
+
 import template from './map.html!text'
+import './map.scss!'
 
 GoogleMap.KEY =
   "AIzaSyA495d72CnxXzdTjvh1KmVPTUcNN-Quo74"
