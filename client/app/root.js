@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import template from './root.html!text'
 
 import mapComponent from './map.js'
 import sliderComponent from './slider.js'
 import dateComponent from './datepicker.js'
+
+import template from './root.html!text'
+import './root.scss!'
 
 export default {
   template: template,
