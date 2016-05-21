@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const API_HOST = "http://localhost:3000/data"
+const API_HOST = "http://localhost:3000/api/events"
 
 export default class API {
   static FetchHeatmap() {
