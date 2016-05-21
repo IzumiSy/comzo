@@ -22,12 +22,12 @@
           maxPeople = dataset[i]["num_of_people"]
         }
       }
-      var scale=d3.scale.sqrt()//x軸の値をsvg領域に埋め込まれるように変換するスケール。
+      var scale=d3.scale.log()//x軸の値をsvg領域に埋め込まれるように変換するスケール。
                       .domain([minPeople,maxPeople])
                       .range([0, 1]);
 
       for(var i=0; i<dataset.length; i++){
-        dataset[i]["num_of_people"] = scale(dataset[i]["num_of_people"])
+        dataset[i]["normed_num_of_people"] = scale(dataset[i]["num_of_people"])
       }
 
 			d3.select("body").text(JSON.stringify(dataset))
