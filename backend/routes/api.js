@@ -11,9 +11,12 @@ var app = express();
 */
 router.get('/events', function(req, res) {
   console.log("一覧表示命令来た");
-  Event.find({
-    date: req.query.date || undefined
-  }, function(err, events) {
+
+  var params = req.query.date ? {
+    date: req.query.date
+  } : {}
+
+  Event.find(params, function(err, events) {
     res.json(events);
     console.log(events)
   });
