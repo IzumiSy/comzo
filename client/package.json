@@ -30,7 +30,8 @@
     "dependencies": {
       "jquery": "npm:jquery@^2.2.4",
       "scss": "github:mobilexag/plugin-sass@^0.4.3",
-      "vue": "npm:vue@^1.0.24"
+      "vue": "npm:vue@^1.0.24",
+      "vue-resource": "npm:vue-resource@^0.7.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
