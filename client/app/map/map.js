@@ -4,6 +4,8 @@ import API from '../util/api.js'
 import template from './map.html!text'
 import './map.scss!'
 
+const MAX_INTENSITY = 150
+
 export default {
   template: template,
 
@@ -92,8 +94,10 @@ export default {
     renderHourly() {
       let _hourlyHeatArray = this.hourlyHeatArray
       this.points.forEach((point, i) => {
-        point.weight = _hourlyHeatArray[i][this.data.hour]
+        point.weight = (_hourlyHeatArray[i][this.data.hour] * MAX_INTENSITY)
       })
+      console.log(this.points.map((d) => d.weight))
+
       Vue.nextTick(() => {
         this.renderHeatmap()
       })
@@ -107,9 +111,10 @@ export default {
       this.heatmap =
         new window.google.maps.visualization.HeatmapLayer({
           data: this.points,
-          map: this.map
+          map: this.map,
+          radius: 65,
+          maxIntensity: MAX_INTENSITY
         })
-      this.heatmap.set('radius', 65)
 
       console.info('[Fire] renderHeatmap')
     },
@@ -126,7 +131,7 @@ export default {
         response.data.forEach((data) => {
           this.points.push({
             location: new window.google.maps.LatLng(data.latitude, data.longitude),
-            weight: data.houry_num[this.data.hour]
+            weight: (data.houry_num[this.data.hour] * MAX_INTENSITY)
           })
           this.hourlyHeatArray.push(data.houry_num)
         })
