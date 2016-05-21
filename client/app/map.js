@@ -2,6 +2,9 @@ import Vue from 'vue'
 import GoogleMap from 'google-maps'
 import template from './map.html!text'
 
+GoogleMap.KEY =
+  "AIzaSyA495d72CnxXzdTjvh1KmVPTUcNN-Quo74"
+
 export default {
   template: template,
 
