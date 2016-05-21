@@ -30,9 +30,13 @@ export default {
 
     // Heatmap update must be right after initilization
     // of Google Map instance creation
-    this.$watch('data', () => {
+    this.$watch('data.date', (v) => {
       this.updateHeatmap()
-    }, { deep: true })
+      this.renderHeatmap()
+    })
+    this.$watch('data.hour', () => {
+      // Just change heatmap hour, not make a request to backend
+    })
   },
 
   created() {
@@ -85,6 +89,10 @@ export default {
     },
 
     renderHeatmap() {
+      if (this.heatmap) {
+        this.heatmap.setMap(null)
+      }
+
       this.heatmap =
         new window.google.maps.visualization.HeatmapLayer({
           data: this.points,
@@ -98,11 +106,12 @@ export default {
     updateHeatmap() {
       console.info('[Fire] updateHeatmap')
 
-      API.FetchHeatmap().then((response) => {
+      API.FetchHeatmap(this.data.date).then((response) => {
         if (!response || !response.data) {
           return
         }
 
+        this.points = []
         response.data.forEach((data) => {
           this.points.push({
             location: new window.google.maps.LatLng(data.latitude, data.longitude),
