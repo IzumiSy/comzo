@@ -5,7 +5,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 var mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test:27017');
 
 //apiサーバーへのルーティング定義
 var api = require('./routes/api');
