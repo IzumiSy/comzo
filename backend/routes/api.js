@@ -9,9 +9,11 @@ var app = express();
   サンプルデータ投入
   db.event.save({name:"araki",event:"eat"})
 */
-router.get('/events',function(req, res){
+router.get('/events', function(req, res) {
   console.log("一覧表示命令来た");
-  Event.find({}, function(err, events) {
+  Event.find({
+    date: req.query.date || undefined
+  }, function(err, events) {
     res.json(events);
     console.log(events)
   });
