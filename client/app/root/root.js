@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import moment from 'moment'
 
 import mapComponent from '../map/map.js'
 import sliderComponent from '../slider/slider.js'
@@ -31,7 +32,7 @@ export default {
     },
 
     'datepicker:date:changed': function(data) {
-      this.heatmap.date = data
+      this.heatmap.date = moment(data).format('YYYY-M-D')
     }
   },
 
