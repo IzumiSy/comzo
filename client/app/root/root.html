@@ -1,10 +1,23 @@
 <div class="root">
-  <div class="datetime-controller">
-    <date-picker></date-picker>
-    <hour-slider></hour-slider>
+  <div class="descriptions">
+    <p class="title bold">
+      Comzo: All-in-one crowd analyzing platform
+    </p>
+    <p class="detail">
+      This is the small demo webapp that shows how Comzo can be used.
+      Comzo is the advanced cutting-edge all-in-one analyzing platform that takes advantage of
+      various type of data on the internet. Cozmo automatically gathers the piled up miscellaneous
+      data which possibly make affection to the behavior of the people in the world or in the
+      specific place, and also generates easy-modifiable/manipulatable summary data as Web API.
+    </p>
   </div>
+  <date-picker></date-picker>
   <div class="map-container">
     <map-view :data.sync="heatmap">
     </map-view>
+  </div>
+  <hour-slider></hour-slider>
+  <div class="copyright">
+    <h6>(C) 2016 Comzo Team (Yuta Ide & Seiya IZUMI)</h6>
   </div>
 </div>
