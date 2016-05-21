@@ -10,6 +10,6 @@ export default class API {
       }).error((data, status, request) => {
         reject(data)
       })
-    })
+    }))
   }
 }

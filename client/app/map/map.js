@@ -49,7 +49,7 @@ export default {
 
         setTimeout(() => {
           this.renderGoogleMap(defaultPosition)
-        }, 1000)
+        }, 500)
       })
     },
 
