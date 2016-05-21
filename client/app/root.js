@@ -14,13 +14,22 @@ export default {
     'date-picker': dateComponent
   },
 
+  data() {
+    return {
+      heatmapDate: null,
+      heatmapHour: null
+    }
+  },
+
   events: {
     'slider:hour:changed': function(data) {
-      // Do something
+      this.heatmapDate = data
+      console.log(data)
     },
 
     'datepicker:date:changed': function(data) {
-      // Do something
+      this.heatmapHour = data
+      console.log(data)
     }
   },
 
