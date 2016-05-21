@@ -35,7 +35,6 @@ export default {
     // of Google Map instance creation
     this.$watch('data.date', (v) => {
       this.updateHeatmap()
-      this.renderHeatmap()
     })
     this.$watch('data.hour', () => {
       this.renderHourly()
@@ -133,6 +132,8 @@ export default {
           })
           this.hourlyHeatArray.push(data.houry_num)
         })
+
+        this.renderHeatmap()
       })
     }
   }
