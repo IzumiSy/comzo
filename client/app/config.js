@@ -20,6 +20,7 @@ System.config({
     "google-maps": "npm:google-maps@3.2.1",
     "jquery": "npm:jquery@2.2.4",
     "js-marker-clusterer": "npm:js-marker-clusterer@1.0.0",
+    "moment": "npm:moment@2.13.0",
     "scss": "github:mobilexag/plugin-sass@0.4.3",
     "text": "github:systemjs/plugin-text@0.0.8",
     "vue": "npm:vue@1.0.24",
