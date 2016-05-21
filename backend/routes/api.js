@@ -4,11 +4,14 @@ var mongoose = require('mongoose');
 var Event = require("../models/event"); //モデルの宣言
 var app = express();
 
-// GET index
-/*
-  サンプルデータ投入
-  db.event.save({name:"araki",event:"eat"})
-*/
+/**
+ * サンプルデータ投入
+ *db.event.save({name:"araki",event:"eat"})
+ */
+
+/**
+ * GET index
+ */
 router.get('/events', function(req, res) {
   var params = {}
 
