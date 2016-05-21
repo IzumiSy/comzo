@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
-import mapComponent from './map.js'
-import sliderComponent from './slider.js'
-import dateComponent from './datepicker.js'
+import mapComponent from '../map/map.js'
+import sliderComponent from '../slider/slider.js'
+import dateComponent from '../datepicker/datepicker.js'
 
 import template from './root.html!text'
 import './root.scss!'
