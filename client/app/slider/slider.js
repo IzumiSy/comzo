@@ -1,5 +1,7 @@
 import Vue from 'vue'
+
 import template from './slider.html!text'
+import './slider.scss!'
 
 export default {
   template: template,

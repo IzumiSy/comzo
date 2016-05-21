@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Resource from 'vue-resource'
-import rootComponent from './root.js'
+import rootComponent from './root/root.js'
 
 Vue.use(Resource)
 
