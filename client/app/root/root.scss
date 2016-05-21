@@ -1,4 +1,17 @@
+body {
+  background: #FAFAFA;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 .root {
-  margin-top: 30px;
+  .descriptions {
+    margin: 0 100px;
+  }
+
+  margin: 30px 150px 0 150px;
   text-align: center;
 }
