@@ -18,6 +18,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.6",
     "jquery": "npm:jquery@2.2.4",
+    "js-marker-clusterer": "npm:js-marker-clusterer@1.0.0",
     "text": "github:systemjs/plugin-text@0.0.8",
     "vue": "npm:vue@1.0.24",
     "vue-resource": "npm:vue-resource@0.7.0",
