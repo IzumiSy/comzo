@@ -7,7 +7,8 @@ module.exports = mongoose.model('Event', new Schema({
   venue: String,
   longitude: Number,
   latitude: Number,
-  num_of_people: Number
+  num_of_people: Number,
+  houry_num: Array
 }, {
   collection: "Event" // これを指定しないと, 勝手に複数形になり, todosでアクセスされてしまう.
 }))
