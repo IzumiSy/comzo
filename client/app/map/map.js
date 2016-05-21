@@ -18,7 +18,7 @@ export default {
 
   watch: {
     data() {
-      console.log("Update")
+      this.updateHeatmap()
     }
   },
 
@@ -39,41 +39,40 @@ export default {
           resolve(null)
         })
       })).then((pos) => {
-        let defaultPosition = {
+        let defaultPosition = pos ? {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        } : {
           lat: -34.397,
           lng: 150.644
         }
 
-        if (pos) {
-          defaultPosition = {
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude
-          }
-        }
-
-        let renderGoogleMap = () => {
-          this.map = new google.maps.Map(this.$el, {
-            center: defaultPosition,
-            disableDefaultUI: true,
-            zoom: 14,
-            styles: [
-              {
-                featureType: "poi",
-                stylers: [{
-                  visibility: "off"
-                }]
-              }
-            ]
-          })
-          google.maps.event.trigger(this.map, 'resize')
-        }
-
-        setTimeout(renderGoogleMap, 1000)
+        setTimeout(() => {
+          this.renderGoogleMap(defaultPosition)
+        }, 1000)
       })
     },
 
+    renderGoogleMap(defaultPosition) {
+      this.map = new google.maps.Map(this.$el, {
+        center: defaultPosition,
+        disableDefaultUI: true,
+        zoom: 14,
+        styles: [
+          {
+            featureType: "poi",
+            stylers: [{
+              visibility: "off"
+            }]
+          }
+        ]
+      })
+
+      google.maps.event.trigger(this.map, 'resize')
+    },
+
     updateHeatmap() {
-      // update
+      console.log("Update")
     }
   }
 }
