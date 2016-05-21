@@ -1,0 +1,41 @@
+{
+  "name": "comzo-client",
+  "version": "1.0.0",
+  "description": "All-in-one crowd analysis platform",
+  "scripts": {
+    "start": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IzumiSy/comzo.git"
+  },
+  "author": "Comzo Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IzumiSy/comzo/issues"
+  },
+  "homepage": "https://github.com/IzumiSy/comzo",
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {
+      "jquery": "npm:jquery@^2.2.4",
+      "moment": "npm:moment@^2.13.0",
+      "scss": "github:mobilexag/plugin-sass@^0.4.3",
+      "text": "github:systemjs/plugin-text@^0.0.8",
+      "vue": "npm:vue@^1.0.24",
+      "vue-resource": "npm:vue-resource@^0.7.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}
