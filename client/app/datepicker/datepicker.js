@@ -9,7 +9,7 @@ export default {
 
   data() {
     return {
-      date: moment().format('YYYY-MM-DD').clone()
+      date: moment().clone().format('YYYY-MM-DD')
     }
   },
 
