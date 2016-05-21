@@ -14,5 +14,28 @@
   "bugs": {
     "url": "https://github.com/IzumiSy/comzo/issues"
   },
-  "homepage": "https://github.com/IzumiSy/comzo"
+  "homepage": "https://github.com/IzumiSy/comzo",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.8.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-webserver": "^0.9.1"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {
+      "jquery": "npm:jquery@^2.2.4",
+      "scss": "github:mobilexag/plugin-sass@^0.4.3",
+      "vue": "npm:vue@^1.0.24"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
 }
