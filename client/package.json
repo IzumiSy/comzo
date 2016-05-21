@@ -21,7 +21,9 @@
       "baseURL": "app"
     },
     "dependencies": {
+      "google-maps": "npm:google-maps@^3.2.1",
       "jquery": "npm:jquery@^2.2.4",
+      "js-marker-clusterer": "npm:js-marker-clusterer@^1.0.0",
       "text": "github:systemjs/plugin-text@^0.0.8",
       "vue": "npm:vue@^1.0.24",
       "vue-resource": "npm:vue-resource@^0.7.0"

@@ -1,5 +1,17 @@
-import root from './root.html!text'
+import Vue from 'vue'
+import Resource from 'vue-resource'
+import rootComponent from './root.js'
 
-console.log(root)
+Vue.use(Resource)
 
-console.log('Hello')
+var app = new Vue({
+  el: "#root-container",
+
+  components: {
+    'root-view': rootComponent
+  },
+
+  created() {
+    console.info("[APP] Vue app created.")
+  }
+})
