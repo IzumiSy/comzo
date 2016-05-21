@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import GoogleMap from 'google-maps'
 
 import template from './map.html!text'
 import './map.scss!'
@@ -14,12 +13,6 @@ export default {
     data: Object
   },
 
-  data() {
-    return {
-      googleMapOptions: {}
-    }
-  },
-
   watch: {
     data() {
       console.log("Update")
@@ -27,16 +20,34 @@ export default {
   },
 
   ready() {
-    GoogleMap.load((google) => {
-      new google.maps.Map(this.$el, this.googleMapOptions)
-    })
-
-    GoogleMap.onLoad(() => {
-      console.info('GoogleMap loaded')
-    })
+    this.initializeGoogleMap()
   },
 
   created() {
     console.info("[APP] mapComponent created")
+  },
+
+  methods: {
+    initializeGoogleMap() {
+      (new Promise((resolve, reject) => {
+        window.navigator.geolocation.getCurrentPosition((pos) => {
+          resolve(pos)
+        }, () => {
+          resolve(null)
+        })
+      })).then((pos) => {
+        let defaultPosition = {
+          lat: -34.397,
+          lng: 150.644
+        }
+
+        if (pos) {
+          defaultPosition = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          }
+        }
+      })
+    }
   }
 }
