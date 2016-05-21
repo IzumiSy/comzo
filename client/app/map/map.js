@@ -4,6 +4,8 @@ import API from '../util/api.js'
 import template from './map.html!text'
 import './map.scss!'
 
+const MAX_INTENSITY = 150
+
 export default {
   template: template,
 
@@ -15,7 +17,8 @@ export default {
     return {
       map: null,
       heatmap: null,
-      points: []
+      points: [],
+      hourlyHeatArray: []
     }
   },
 
@@ -30,9 +33,13 @@ export default {
 
     // Heatmap update must be right after initilization
     // of Google Map instance creation
-    this.$watch('data', () => {
+    this.$watch('data.date', (v) => {
       this.updateHeatmap()
-    }, { deep: true })
+      this.renderHeatmap()
+    })
+    this.$watch('data.hour', () => {
+      this.renderHourly()
+    })
   },
 
   created() {
@@ -68,7 +75,7 @@ export default {
     renderGoogleMap(defaultPosition) {
       this.map = new google.maps.Map(this.$el, {
         center: defaultPosition,
-        disableDefaultUI: true,
+        streetViewControl: false,
         zoom: 14,
         styles: [
           {
@@ -84,13 +91,30 @@ export default {
       console.info('[Fire] renderGoogleMap')
     },
 
+    renderHourly() {
+      let _hourlyHeatArray = this.hourlyHeatArray
+      this.points.forEach((point, i) => {
+        point.weight = (_hourlyHeatArray[i][this.data.hour] * MAX_INTENSITY)
+      })
+      console.log(this.points.map((d) => d.weight))
+
+      Vue.nextTick(() => {
+        this.renderHeatmap()
+      })
+    },
+
     renderHeatmap() {
+      if (this.heatmap) {
+        this.heatmap.setMap(null)
+      }
+
       this.heatmap =
         new window.google.maps.visualization.HeatmapLayer({
           data: this.points,
-          map: this.map
+          map: this.map,
+          radius: 65,
+          maxIntensity: MAX_INTENSITY
         })
-      this.heatmap.set('radius', 50)
 
       console.info('[Fire] renderHeatmap')
     },
@@ -98,16 +122,18 @@ export default {
     updateHeatmap() {
       console.info('[Fire] updateHeatmap')
 
-      API.FetchHeatmap().then((response) => {
+      API.FetchHeatmap(this.data.date).then((response) => {
         if (!response || !response.data) {
           return
         }
 
+        this.points = []
         response.data.forEach((data) => {
           this.points.push({
             location: new window.google.maps.LatLng(data.latitude, data.longitude),
-            weight: data.num_of_people
+            weight: (data.houry_num[this.data.hour] * MAX_INTENSITY)
           })
+          this.hourlyHeatArray.push(data.houry_num)
         })
       })
     }
