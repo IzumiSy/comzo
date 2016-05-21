@@ -3,32 +3,9 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
+var mongoose = require("mongoose");
 
-var AWS = require('aws-sdk');
-var dynamodb = new AWS.DynamoDB({region: 'us-west-2'});
-
-var params = {
-    ExclusiveStartTableName: 'STRING_VALUE',
-    Limit: 10
-};
-
-dynamodb.listTables(params, function(err, data) {
-    if (err) {
-        console.log(err, err.stack); // an error occurred
-    } else {
-        console.log(data);           // successful response
-    }
-});
-
-var params = {TableName:'events'};
-dynamodb.describeTable(params, function(err, data) {
-    if (err) {
-        console.log(err, err.stack);
-    } else {
-        console.log(data);
-        // php.var_dump(data);
-    }
-});
+mongoose.connect('mongodb://localhost/test');
 
 //apiサーバーへのルーティング定義
 var api = require( './routes/api' );
