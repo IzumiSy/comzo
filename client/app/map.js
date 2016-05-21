@@ -5,9 +5,19 @@ import template from './map.html!text'
 export default {
   template: template,
 
+  props: {
+    data: Object
+  },
+
   data() {
     return {
       googleMapOptions: {}
+    }
+  },
+
+  watch: {
+    data() {
+      console.log("Update")
     }
   },
 
