@@ -96,8 +96,6 @@ export default {
       this.points.forEach((point, i) => {
         point.weight = (_hourlyHeatArray[i][this.data.hour] * MAX_INTENSITY)
       })
-      console.log(this.points.map((d) => d.weight))
-
       Vue.nextTick(() => {
         this.renderHeatmap()
       })
