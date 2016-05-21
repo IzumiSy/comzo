@@ -3,8 +3,10 @@
     type="range"
     class="value-range"
     v-model="hour"
-    debounce="500"
     min="0"
-    max="24"
+    max="23"
     step="1" />
+  <div>
+    {{ hour }}H
+  </div>
 </div>

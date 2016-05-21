@@ -15,7 +15,8 @@ export default {
     return {
       map: null,
       heatmap: null,
-      points: []
+      points: [],
+      hourlyHeatArray: []
     }
   },
 
@@ -35,7 +36,7 @@ export default {
       this.renderHeatmap()
     })
     this.$watch('data.hour', () => {
-      // Just change heatmap hour, not make a request to backend
+      this.renderHourly()
     })
   },
 
@@ -72,7 +73,7 @@ export default {
     renderGoogleMap(defaultPosition) {
       this.map = new google.maps.Map(this.$el, {
         center: defaultPosition,
-        disableDefaultUI: true,
+        streetViewControl: false,
         zoom: 14,
         styles: [
           {
@@ -88,6 +89,16 @@ export default {
       console.info('[Fire] renderGoogleMap')
     },
 
+    renderHourly() {
+      let _hourlyHeatArray = this.hourlyHeatArray
+      this.points.forEach((point, i) => {
+        point.weight = _hourlyHeatArray[i][this.data.hour]
+      })
+      Vue.nextTick(() => {
+        this.renderHeatmap()
+      })
+    },
+
     renderHeatmap() {
       if (this.heatmap) {
         this.heatmap.setMap(null)
@@ -98,7 +109,7 @@ export default {
           data: this.points,
           map: this.map
         })
-      this.heatmap.set('radius', 50)
+      this.heatmap.set('radius', 65)
 
       console.info('[Fire] renderHeatmap')
     },
@@ -115,8 +126,9 @@ export default {
         response.data.forEach((data) => {
           this.points.push({
             location: new window.google.maps.LatLng(data.latitude, data.longitude),
-            weight: data.num_of_people
+            weight: data.houry_num[this.data.hour]
           })
+          this.hourlyHeatArray.push(data.houry_num)
         })
       })
     }
