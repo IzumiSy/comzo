@@ -14,21 +14,25 @@ export default {
   data() {
     return {
       map: null,
-      points: [ {} ]
+      heatmap: null,
+      points: []
     }
   },
 
-  watch: {
-    data: {
-      handler() {
-        this.updateHeatmap()
-      },
-      deep: true
+  events: {
+    'map:render:heatmap': function() {
+      this.renderHeatmap()
     }
   },
 
   ready() {
     this.initializeGoogleMap()
+
+    // Heatmap update must be right after initilization
+    // of Google Map instance creation
+    this.$watch('data', () => {
+      this.updateHeatmap()
+    }, { deep: true })
   },
 
   created() {
@@ -54,7 +58,10 @@ export default {
 
         setTimeout(() => {
           this.renderGoogleMap(defaultPosition)
+          this.renderHeatmap()
         }, 500)
+
+        console.info('[Fire] initializeGoogleMap')
       })
     },
 
@@ -74,18 +81,33 @@ export default {
       })
 
       google.maps.event.trigger(this.map, 'resize')
+      console.info('[Fire] renderGoogleMap')
+    },
+
+    renderHeatmap() {
+      this.heatmap =
+        new window.google.maps.visualization.HeatmapLayer({
+          data: this.points,
+          map: this.map
+        })
+      this.heatmap.set('radius', 50)
+
+      console.info('[Fire] renderHeatmap')
     },
 
     updateHeatmap() {
+      console.info('[Fire] updateHeatmap')
+
       API.FetchHeatmap().then((response) => {
         if (!response || !response.data) {
           return
         }
 
-        data.response.forEach((data) => {
-          this.points.pish(new window.google.maps.LatLng(
-            data.latitude, data.longitude
-          ))
+        response.data.forEach((data) => {
+          this.points.push({
+            location: new window.google.maps.LatLng(data.latitude, data.longitude),
+            weight: data.num_of_people
+          })
         })
       })
     }
