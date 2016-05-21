@@ -18,7 +18,8 @@ eventsData.forEach(function(data) {
     date: data["date"],
     venue: data["venue"],
     longitude: data["longitude"],
-    latitude: data["latitude"]
+    latitude: data["latitude"],
+    $push: { houry_num: { $each: data["houry_num"] } }
   }, {
     upsert: true
   }, function(err, doc) {
