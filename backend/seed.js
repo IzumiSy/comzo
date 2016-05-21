@@ -1,6 +1,9 @@
 var Event = require("./models/event");
 var ObjectID = require('mongodb').ObjectID;
 var eventsData = require('./events.json').data
+var mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost/test:27017');
 
 eventsData.forEach(function(data) {
   Event.update({
@@ -17,6 +20,6 @@ eventsData.forEach(function(data) {
   }, function(err, doc) {
     console.log(doc);
     console.log(err);
-    console.log("更新しました?");
+    console.log("Updated???");
   });
 })
