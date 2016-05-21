@@ -1,13 +1,4 @@
-'''
-@import crawlerResult.txt
-@export modifyResult.txt
-
-クローリング後のデータ(crawlerResult.txt)を投入しよう.
-それから, 整形してくれるよ！
-欠落データを消すスクリプトはこの次に実行されるよ!
-'''
-
-crawlerResult = [{'address': '東京都墨田区横網1-3-28',
+[{'address': '東京都墨田区横網1-3-28',
   'date': '16/5/21 (土)',
   'name': '大相撲 夏場所(五月場所) 十四日目',
   'num_of_people': '11,098人',
@@ -2617,62 +2608,3 @@ crawlerResult = [{'address': '東京都墨田区横網1-3-28',
   'num_of_people': '1,770人',
   'start': '',
   'venue': 'TOHOシネマズ日本橋 (東京)'}]
-
-
-import urllib.request
-import geocoder
-from xml.etree.ElementTree import parse
-
-def modify_date(date_str):
-    try:
-        date_str = date_str[:len(date_str)-4]
-        date_str = date_str.replace("/", "-")
-    except:
-        date_str = ""
-    return date_str
-
-def modify_venue(venue_str):
-    venue_str = venue_str[:len(venue_str)-5]
-    return venue_str
-
-def modify_num_of_people(num_str):
-    try:
-        num_str = num_str[:len(num_str)-1]
-        num_str = int(num_str.replace(",", ""))
-    except:
-        print("だめだああ")
-        num_str = ""
-    return num_str
-
-def modify_adr2geo(adr_str):
-    g = geocoder.google(adr_str)
-    if g.latlng == []:
-        return ["", ""]
-    else:
-         return [float(g.lat), float(g.lng)]
-
-def modify_start(start_str):
-    try:
-        start_str = start_str[0:2]
-        start_str = int(start_str)
-    except:
-        start_str = ""
-        print("startだめだあああ")
-    return start_str
-
-
-new_events = []
-
-for event in crawlerResult:
-    new_event = {}
-    new_event["start"] = modify_start(event["start"])
-    new_event["date"] = modify_date(event["date"])
-    new_event["num_of_people"] = modify_num_of_people(event["num_of_people"])
-    new_event["venue"] = modify_venue(event["venue"])
-    new_event["latitude"] = modify_adr2geo(event["address"])[0]
-    new_event["longitude"] = modify_adr2geo(event["address"])[1]
-    print(new_event)
-    new_events.append(new_event)
-
-print(new_events)
-print(len(new_events))
