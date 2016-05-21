@@ -3,14 +3,17 @@ import Vue from 'vue'
 import template from './map.html!text'
 import './map.scss!'
 
-GoogleMap.KEY =
-  "AIzaSyA495d72CnxXzdTjvh1KmVPTUcNN-Quo74"
-
 export default {
   template: template,
 
   props: {
     data: Object
+  },
+
+  data() {
+    return {
+      map: null
+    }
   },
 
   watch: {
@@ -47,7 +50,30 @@ export default {
             lng: pos.coords.longitude
           }
         }
+
+        let renderGoogleMap = () => {
+          this.map = new google.maps.Map(this.$el, {
+            center: defaultPosition,
+            disableDefaultUI: true,
+            zoom: 14,
+            styles: [
+              {
+                featureType: "poi",
+                stylers: [{
+                  visibility: "off"
+                }]
+              }
+            ]
+          })
+          google.maps.event.trigger(this.map, 'resize')
+        }
+
+        setTimeout(renderGoogleMap, 1000)
       })
+    },
+
+    updateHeatmap() {
+      // update
     }
   }
 }
