@@ -27,13 +27,11 @@ export default {
 
   events: {
     'slider:hour:changed': function(data) {
-      this.heatmap.date = data
-      console.log(data)
+      this.heatmap.hour = data
     },
 
     'datepicker:date:changed': function(data) {
-      this.heatmap.hour = data
-      console.log(data)
+      this.heatmap.date = data
     }
   },
 

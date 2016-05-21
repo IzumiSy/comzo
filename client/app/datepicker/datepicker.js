@@ -9,8 +9,12 @@ export default {
 
   data() {
     return {
-      date: moment().clone().format('YYYY-MM-DD')
+      date: null
     }
+  },
+
+  ready() {
+    this.date = moment().clone().format('YYYY-MM-DD')
   },
 
   watch: {

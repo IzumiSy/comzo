@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import API from '../util/api.js'
 
 import template from './map.html!text'
 import './map.scss!'
@@ -12,18 +13,26 @@ export default {
 
   data() {
     return {
-      map: null
+      map: null,
+      heatmap: null,
+      points: []
     }
   },
 
-  watch: {
-    data() {
-      this.updateHeatmap()
+  events: {
+    'map:render:heatmap': function() {
+      this.renderHeatmap()
     }
   },
 
   ready() {
     this.initializeGoogleMap()
+
+    // Heatmap update must be right after initilization
+    // of Google Map instance creation
+    this.$watch('data', () => {
+      this.updateHeatmap()
+    }, { deep: true })
   },
 
   created() {
@@ -49,7 +58,10 @@ export default {
 
         setTimeout(() => {
           this.renderGoogleMap(defaultPosition)
+          this.renderHeatmap()
         }, 500)
+
+        console.info('[Fire] initializeGoogleMap')
       })
     },
 
@@ -69,10 +81,35 @@ export default {
       })
 
       google.maps.event.trigger(this.map, 'resize')
+      console.info('[Fire] renderGoogleMap')
+    },
+
+    renderHeatmap() {
+      this.heatmap =
+        new window.google.maps.visualization.HeatmapLayer({
+          data: this.points,
+          map: this.map
+        })
+      this.heatmap.set('radius', 50)
+
+      console.info('[Fire] renderHeatmap')
     },
 
     updateHeatmap() {
-      console.log("Update")
+      console.info('[Fire] updateHeatmap')
+
+      API.FetchHeatmap().then((response) => {
+        if (!response || !response.data) {
+          return
+        }
+
+        response.data.forEach((data) => {
+          this.points.push({
+            location: new window.google.maps.LatLng(data.latitude, data.longitude),
+            weight: data.num_of_people
+          })
+        })
+      })
     }
   }
 }
