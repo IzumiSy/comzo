@@ -20,6 +20,16 @@ dynamodb.listTables(params, function(err, data) {
     }
 });
 
+var params = {TableName:'events'};
+dynamodb.describeTable(params, function(err, data) {
+    if (err) {
+        console.log(err, err.stack);
+    } else {
+        console.log(data);
+        // php.var_dump(data);
+    }
+});
+
 //apiサーバーへのルーティング定義
 var api = require( './routes/api' );
 app.use('/api', api);
