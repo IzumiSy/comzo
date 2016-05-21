@@ -1,0 +1,24 @@
+{
+  "name": "comzo-api-server",
+  "version": "1.0.0",
+  "description": "All-in-one crowd analysis platform",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IzumiSy/comzo.git"
+  },
+  "author": "Comzo Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IzumiSy/comzo/issues"
+  },
+  "homepage": "https://github.com/IzumiSy/comzo#readme",
+  "dependencies": {
+    "aws-sdk": "^2.3.14",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4"
+  }
+}
