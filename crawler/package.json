@@ -1,5 +1,5 @@
 {
-  "name": "comzo-api-server",
+  "name": "dynamo-driver",
   "version": "1.0.0",
   "description": "All-in-one crowd analysis platform",
   "main": "app.js",
