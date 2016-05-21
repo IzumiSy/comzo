@@ -16,19 +16,21 @@ export default {
 
   data() {
     return {
-      heatmapDate: null,
-      heatmapHour: null
+      heatmap: {
+        date: null,
+        hour: null
+      }
     }
   },
 
   events: {
     'slider:hour:changed': function(data) {
-      this.heatmapDate = data
+      this.heatmap.date = data
       console.log(data)
     },
 
     'datepicker:date:changed': function(data) {
-      this.heatmapHour = data
+      this.heatmap.hour = data
       console.log(data)
     }
   },
