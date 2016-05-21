@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Event = require("../models/event"); //モデルの宣言
+var moment = require("moment");
 var app = express();
 var ObjectID = require('mongodb').ObjectID;
 
@@ -45,6 +46,30 @@ router.get('/seed',function(req, res){
       }
     );
   };
+});
+
+router.get("/date", function(req, res){
+  console.log("/dateにアクセスがありました. クエリは")
+  console.log(req.query);
+  var dateTime = req.query.date;
+  Event.find({date: dateTime}, function(err, events) {
+    console.log("hay")
+    res.json(events);
+    console.log(events);
+  });
+});
+
+router.get("/date-sum", function(req, res){
+  console.log("/month-sumにアクセスがありました. クエリは");
+  console.log(req.query);
+  var dateTime = req.query.date;
+  Event.find({date: dateTime}, function(err, events) {
+    var sum_people_per_day = 0;
+    for(var i=0; i<events.length; i++){
+      sum_people_per_day += events[i]["num_of_people"];
+    }
+    res.json(sum_people_per_day);
+  })
 });
 
 module.exports = router;
