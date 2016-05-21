@@ -19,6 +19,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "jquery": "npm:jquery@2.2.4",
     "scss": "github:mobilexag/plugin-sass@0.4.3",
+    "text": "github:systemjs/plugin-text@0.0.8",
     "vue": "npm:vue@1.0.24",
     "vue-resource": "npm:vue-resource@0.7.0",
     "github:jspm/nodelibs-assert@0.1.0": {
