@@ -10,4 +10,4 @@ module.exports = mongoose.model('Event', new Schema({
   num_of_people: Number
 }, {
   collection: "Event" // これを指定しないと, 勝手に複数形になり, todosでアクセスされてしまう.
-});
+}))
