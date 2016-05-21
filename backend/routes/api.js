@@ -10,12 +10,13 @@ var app = express();
   db.event.save({name:"araki",event:"eat"})
 */
 router.get('/events', function(req, res) {
+  var params = {}
+
+  if (req.query.date) {
+    params.date = req.query.date
+  }
+
   console.log("一覧表示命令来た");
-
-  var params = req.query.date ? {
-    date: req.query.date
-  } : {}
-
   Event.find(params, function(err, events) {
     res.json(events);
     console.log(events)
