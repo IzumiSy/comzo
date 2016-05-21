@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/test');
 
 //apiサーバーへのルーティング定義
-var api = require( './routes/api' );
+var api = require('./routes/api');
 app.use('/api', api);
 
 app.listen(port);
