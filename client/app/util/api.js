@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
-export default class API {
-  const API_HOST = ""
+const API_HOST = "http://localhost:3000/data"
 
-  static FetchHeatMap() {
+export default class API {
+  static FetchHeatmap() {
     return (new Promise((resolve, reject) => {
-      Vue.http.get(API_HOST, (data, status, request) => {
+      Vue.http.get(API_HOST).then((data) => {
         resolve(data)
-      }).error((data, status, request) => {
+      }).catch((data) => {
         reject(data)
       })
     }))

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import API from '../util/api.js'
 
 import template from './map.html!text'
 import './map.scss!'
@@ -12,13 +13,17 @@ export default {
 
   data() {
     return {
-      map: null
+      map: null,
+      points: [ {} ]
     }
   },
 
   watch: {
-    data() {
-      this.updateHeatmap()
+    data: {
+      handler() {
+        this.updateHeatmap()
+      },
+      deep: true
     }
   },
 
@@ -72,7 +77,17 @@ export default {
     },
 
     updateHeatmap() {
-      console.log("Update")
+      API.FetchHeatmap().then((response) => {
+        if (!response || !response.data) {
+          return
+        }
+
+        data.response.forEach((data) => {
+          this.points.pish(new window.google.maps.LatLng(
+            data.latitude, data.longitude
+          ))
+        })
+      })
     }
   }
 }
