@@ -5,6 +5,10 @@ var mongoose = require("mongoose");
 
 mongoose.connect('mongodb://localhost/test:27017');
 
+Event.remove({}, function() {
+  console.log("Removed all!")
+})
+
 eventsData.forEach(function(data) {
   Event.update({
     _id: new ObjectID()
