@@ -35,6 +35,13 @@ export default {
         rendering_data.push(res["data"][i]["sum"])
         x_ticks.push(res["data"][i]["day"])
       }
+
+      var ave = 0
+      var sum = 0
+      for(var i=1; i<rendering_data.length; i++){
+        sum += rendering_data[i]
+      }
+      ave = Math.round(sum/rendering_data.length);
        // Do something here
        var chart = c3.generate({
        bindto: '#chart',
@@ -43,7 +50,7 @@ export default {
          columns: [
            x_ticks,
            rendering_data,
-           ["平均", 120000, 120000, 120000, 120000, 120000, 120000, 120000]
+           ["平均", ave, ave, ave, ave, ave, ave, ave]
          ],
          types: {
             "混雑度": 'line',
