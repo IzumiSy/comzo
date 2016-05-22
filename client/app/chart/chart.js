@@ -29,19 +29,12 @@ export default {
     },
 
     renderCharts(res) {
-      console.log(res["data"]);
-      console.log(res["data"].length);
-      console.log(res["data"][0]);
-      console.log(res["data"][0]["sum"]);
       var rendering_data = ["混雑度"]
       var x_ticks = ["x"]
       for(var i=0; i<res["data"].length; i++){
         rendering_data.push(res["data"][i]["sum"])
         x_ticks.push(res["data"][i]["day"])
       }
-      console.log(rendering_data)
-      console.log("上のレンダリン具データ")
-      console.log(x_ticks)
        // Do something here
        var chart = c3.generate({
        bindto: '#chart',
