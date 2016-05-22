@@ -28,17 +28,59 @@ router.get('/events', function(req, res) {
   });
 });
 
-router.get("/date-sum", function(req, res){
+router.get("/date-sum", function(req, res) {
   console.log("/month-sumにアクセスがありました. クエリは");
   console.log(req.query);
-  var dateTime = req.query.date;
-  Event.find({date: dateTime}, function(err, events) {
+  var params = {}
+
+  if (req.query.date) {
+    params = req.query.date;
+  }
+
+  Event.find(params, function(err, events) {
     var sum_people_per_day = 0;
-    for(var i=0; i<events.length; i++){
-      sum_people_per_day += events[i]["num_of_people"];
-    }
+    events.forEach(function(event) {
+      return sum_people_per_day += event["num_of_people"]
+    })
     res.json(sum_people_per_day);
   })
 });
+
+router.get("/sum-as-week", function(req, res) {
+  var date = {}
+
+  if (req.query.date) {
+    date = req.query.date
+  }
+
+  var _getDateValue = function(date) {
+    return new Promise(function(resolve, reject) {
+      var _date = date.format('YYYY-M-D')
+      Event.find({ date: _date }, function(err, events) {
+        var _sum = 0
+        events.forEach(function(event) {
+          _sum += event["num_of_people"]
+        })
+        resolve({
+          day: _date,
+          sum: _sum
+        })
+      })
+    })
+  }
+
+  var _date = moment(date).clone()
+  var _promises = []
+
+  for (var i = 0;i < 7;i++) {
+    _date.add(1, "day")
+    _promises.push(_getDateValue(_date))
+  }
+
+  Promise.all(_promises).then(function(results) {
+    console.log(results)
+    res.json(results)
+  })
+})
 
 module.exports = router;
