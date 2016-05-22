@@ -1,7 +1,7 @@
 # 開発ログ
 
 ## 環境構築
-  * express()の導入 `npm install express -S`
+  * expressの導入 `npm install express -S`
   * mongooseの導入 `npm install mongoose -S`
 
 ## mongodb
