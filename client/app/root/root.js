@@ -4,6 +4,7 @@ import moment from 'moment'
 import mapComponent from '../map/map.js'
 import sliderComponent from '../slider/slider.js'
 import dateComponent from '../datepicker/datepicker.js'
+import chartComponent from '../chart/chart.js'
 
 import template from './root.html!text'
 import './root.scss!'
