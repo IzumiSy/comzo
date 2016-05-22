@@ -19,7 +19,7 @@ export default class API {
 
   static FetchWeekSummary(date) {
     return (new Promise((resolve, reject) => {
-      resource(`${API_HOST}/api/sum-of-week`).get(null, { date: date }).then((data) => {
+      resource(`${API_HOST}/api/sum-as-week`).get(null, { date: date }).then((data) => {
         resolve(data)
       }).catch((data) => {
         reject(data)
