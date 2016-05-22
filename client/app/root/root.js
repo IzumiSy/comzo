@@ -15,7 +15,8 @@ export default {
   components: {
     'map-view': mapComponent,
     'hour-slider': sliderComponent,
-    'date-picker': dateComponent
+    'date-picker': dateComponent,
+    'chart': chartComponent
   },
 
   data() {
