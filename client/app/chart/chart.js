@@ -34,25 +34,38 @@ export default {
       console.log(res["data"][0]);
       console.log(res["data"][0]["sum"]);
       var rendering_data = ["混雑度"]
+      var x_ticks = ["x"]
       for(var i=0; i<res["data"].length; i++){
         rendering_data.push(res["data"][i]["sum"])
+        x_ticks.push(res["data"][i]["day"])
       }
       console.log(rendering_data)
       console.log("上のレンダリン具データ")
+      console.log(x_ticks)
        // Do something here
        var chart = c3.generate({
        bindto: '#chart',
        data: {
+         x:"x",
          columns: [
+           x_ticks,
            rendering_data,
            ["平均", 120000, 120000, 120000, 120000, 120000, 120000, 120000]
          ],
          types: {
-            混雑度: 'spline',
-            平均: 'spline'
+            混雑度: 'line',
+            平均: 'line'
         }
        },
        axis: {
+         x: {
+           type: 'category',
+           tick: {
+               rotate: 75,
+               multiline: false
+           },
+           height: 130
+       },
          y: {
            label: { // ADD
              text: 'Y Label'
