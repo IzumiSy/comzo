@@ -9,15 +9,25 @@ export default {
 
   props: ["date"],
 
+  watch: {
+    date() {
+      this.makeRequest()
+    }
+  },
+
   ready() {
-    API.FetchWeekSummary(this.date).then((response) => {
-      this.renderCharts(response)
-    }).catch((response) => {
-      // TODO error handling
-    })
+    this.makeRequest()
   },
 
   methods: {
+    makeRequest() {
+      API.FetchWeekSummary(this.date).then((response) => {
+        this.renderCharts(response)
+      }).catch((response) => {
+        // TODO error handling
+      })
+    },
+
     renderCharts(res) {
       console.log(res["data"]);
       console.log(res["data"].length);
@@ -34,7 +44,7 @@ export default {
        bindto: '#chart',
        data: {
          columns: [
-           ["混雑度", 79646, 45133, 67683, 50858, 112372, 159179, 162147],
+           rendering_data,
            ["平均", 120000, 120000, 120000, 120000, 120000, 120000, 120000]
          ],
          types: {
