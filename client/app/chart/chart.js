@@ -53,8 +53,8 @@ export default {
            ["平均", 120000, 120000, 120000, 120000, 120000, 120000, 120000]
          ],
          types: {
-            混雑度: 'line',
-            平均: 'line'
+            "混雑度": 'line',
+            "平均": 'line'
         }
        },
        axis: {
@@ -68,7 +68,7 @@ export default {
        },
          y: {
            label: { // ADD
-             text: 'Y Label'
+             text: '混雑度'
            }
          }
        }
